@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+	
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<title>My Gallery</title>
+		
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" 
+		integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" 
+		integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+		
+		<!-- My Gallery Design -->
+		<link rel="stylesheet" href="css/galleryDesign.css">
+
+		
+	</head>
+	
+	<body>
+		<div class="container">
+		
+			<div class="page-header">
+			  <h1>My Gallery <small>All albums together</small></h1>
+			</div>
+			
+			<ul class="nav nav-pills">
+			  <li role="presentation" id="album-tab"><a href="#">Albums</a></li>
+			  <li role="presentation" id="photo-tab"><a href="#">Photos</a></li>
+			  <li role="presentation" id="slide-tab"><a href="#">Slideshow</a></li>
+			</ul>
+			
+			</br>
+			
+			<div id="content"></div>
+
+		</div>
+		
+		<!-- jQuery -->
+		<script
+		  src="https://code.jquery.com/jquery-3.2.1.min.js"
+		  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+		  crossorigin="anonymous"></script>
+		  
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" 
+		integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+		
+		<!-- Handlebars -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.10/handlebars.js"></script>
+		
+		<!-- Albums -->
+		<script src="js/albums.js"></script>
+		
+		<!-- The Gallery Script -->
+		<script src="js/galleryScript.js"></script>
+		
+		<script id="gallery-book" type="text/x-handlebars-template">
+			<div class="row">
+				{{#each albums}}
+				  <div class="col-sm-6 col-md-3 goPhotos"  data-id="{{@index}}">
+					<div class="thumbnail">
+					  <img src="{{thumbnail}}" alt="">
+					  <div class="caption">
+						<h3>{{name}}</h3>
+						<p>{{description}}</p>
+						<p>{{photos.length}} Photos</p>
+					  </div>
+					</div>
+				  </div>
+				{{/each}}
+				<div class="col-sm-6 col-md-3 addAlbum"">
+					<div class="thumbnail">
+					  <img src="images/plus.png" alt="">
+					  <div class="caption">
+						<h3>Add a new one</h3>
+					  </div>
+					</div>
+				  </div>
+			</div>
+			
+		</script>
+		
+		<script id="album-book" type="text/x-handlebars-template">
+			<div class="row">
+				{{#each photos}}
+				  <div class="col-sm-6 col-md-3 goPhoto" data-id="{{@index}}">
+					<div class="thumbnail">
+					  <img src="{{src}}" alt="">
+					  <div class="caption">
+						<h3>{{title}}</h3>
+						<p>{{description}}</p>
+					  </div>
+					</div>
+				  </div>
+				{{/each}}
+				<div class="col-sm-6 col-md-3 addPhoto">
+					<div class="thumbnail">
+					  <img src="images/plus.png" alt="">
+					  <div class="caption">
+						<h3>Add a new one</h3>
+					  </div>
+					</div>
+				</div>
+			</div>
+		</script>
+		
+		<script id="photo-book" type="text/x-handlebars-template">
+			<div class="row">
+				  <div class="col-md-12">
+					<div class="thumbnail">
+					  <img src="{{src}}" alt="">
+					  <div class="caption">
+						<h3>{{title}}</h3>
+						<p>{{description}}</p>
+					  </div>
+					</div>
+				  </div>
+			</div>
+		</script>
+		
+		<script id="slide-book" type="text/x-handlebars-template">
+			<div id="slideslide">
+				<div class="slideshow-container">
+					{{#each photos}}
+					  <div class="mySlides">
+						<img src="{{src}}" style="width:100%">
+						<div class="text">{{title}}</div>
+					  </div>
+					{{/each}}
+					  <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+					  <a class="next" onclick="plusSlides(1)">&#10095;</a>
+				</div>
+				
+				<br>
+
+				<div style="text-align:center">
+					{{#each photos}}
+						<span class="dot" onclick="currentSlide({{@index}}+1)"></span> 
+					{{/each}}
+				</div>
+			</div>
+		</script>
+		
+	</body>
+</html>
